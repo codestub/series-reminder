@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Requests\AuthenticationRequest;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('register', 'authenticate');
+    }
+
     public function register(RegistrationRequest $request)
     {
         $user = User::create([
@@ -21,24 +26,47 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(['token' => $token], 200);
+        return $this->respondWithToken($token);
     }
 
-    public function authenticate()
+    public function authenticate(AuthenticationRequest $request)
     {
-        $credentials = request()->only('email', 'password');
+        $token = JWTAuth::attempt($request->only('email', 'password'));
 
-        try {
-            $token = JWTAuth::attempt($credentials);
-
-            if (!$token) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
+        if (!$token) {
+            return response()->json(['errors' => ['credentials' => 'Invalid credentials']], 401);
+        } else {
+            return $this->respondWithToken($token);
         }
-        catch(JWTException $e) {
-            return response()->json(['error' => 'something_went_wrong'], 500);
-        }
+    }
 
-        return response()->json(['token' => $token], 200);
+    public function invalidate()
+    {
+        $this->guard()->logout();
+
+        return response()->json(['message' => 'Successfully logged out'], 200);
+    }
+
+    public function refresh()
+    {
+        return $this->respondWithToken($this->guard()->refresh());
+    }
+
+    public function user()
+    {
+        return response()->json($this->guard()->user(), 200);
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'token' => $token,
+            'expires' => $this->guard()->factory()->getTTL() * 60
+        ]);
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
     }
 }
