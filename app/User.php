@@ -37,4 +37,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function series()
+    {
+        $this->belongsToMany('App\Series');
+    }
 }
