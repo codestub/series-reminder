@@ -19,3 +19,6 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'AuthController@register');
 Route::post('authenticate', 'AuthController@authenticate');
+Route::post('invalidate', 'AuthController@invalidate');
+Route::post('refresh', 'AuthController@refresh');
+Route::post('user', 'AuthController@user');
