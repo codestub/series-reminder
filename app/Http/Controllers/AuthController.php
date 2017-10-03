@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use JWTAuth;
+use JWTFactory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -59,9 +61,10 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
+        // May incorrectly set expiry date?
         return response()->json([
             'token' => $token,
-            'expires' => $this->guard()->factory()->getTTL() * 60
+            'expires' => JWTFactory::getTTL() * 60
         ]);
     }
 
