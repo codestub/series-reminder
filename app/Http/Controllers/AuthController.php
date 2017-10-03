@@ -8,6 +8,7 @@ use JWTFactory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Requests\AuthenticationRequest;
 
@@ -61,10 +62,9 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
-        // May incorrectly set expiry date?
         return response()->json([
             'token' => $token,
-            'expires' => JWTFactory::getTTL() * 60
+            'expires' => Carbon::now()->addMinutes(JWTFactory::getTTL())->toDateTimeString()
         ]);
     }
 
