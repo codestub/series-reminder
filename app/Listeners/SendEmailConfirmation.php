@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use Mail;
-use App\User;
 use App\Mail\ConfirmEmail;
 use App\Events\UserRegistration;
 use Illuminate\Queue\InteractsWithQueue;
