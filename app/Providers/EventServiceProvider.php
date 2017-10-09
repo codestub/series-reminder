@@ -15,6 +15,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\UserRegistration' => [
             'App\Listeners\SendEmailConfirmation'
+        ],
+        'App\Events\UserConfirmed' => [
+            'App\Listeners\WelcomeUser'
         ]
     ];
 
