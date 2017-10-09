@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use Mail;
-use Welcome;
+use App\Mail\WelcomeEmail;
 use App\Events\UserConfirmed;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,6 +28,6 @@ class WelcomeUser
      */
     public function handle(UserConfirmed $event)
     {
-        Mail::to($event->user)->send(new Welcome);
+        Mail::to($event->user)->send(new WelcomeEmail);
     }
 }
