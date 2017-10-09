@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Mail;
 use JWTAuth;
 use JWTFactory;
 use App\User;
 use App\Mail\Welcome;
+use App\Events\UserRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        Mail::to($user)->send(new Welcome);
+        event(new UserRegistration($user));
 
         return $this->respondWithToken($token);
     }
