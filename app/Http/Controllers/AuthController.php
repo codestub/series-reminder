@@ -6,7 +6,6 @@ use Auth;
 use JWTAuth;
 use JWTFactory;
 use App\User;
-use App\Mail\Welcome;
 use App\Events\UserRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,14 +25,13 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'confirmation_token' => str_random(20)
         ]);
-
-        $token = JWTAuth::fromUser($user);
 
         event(new UserRegistration($user));
 
-        return $this->respondWithToken($token);
+        return response()->json(['message' => 'Please check your email to confirm your account'], 200);
     }
 
     public function authenticate(AuthenticationRequest $request)
@@ -62,6 +60,29 @@ class AuthController extends Controller
     public function user()
     {
         return response()->json($this->guard()->user(), 200);
+    }
+    
+    public function confirm($token)
+    {
+        if (!$token) {
+            return response()->json(['error' => 'Bad request'], 400);
+        } 
+
+        $user = User::where('confirmation_token', $token)->first();
+
+        if (!$user) {
+            return response()->json(['error' => 'Invalid confirmation code'], 401);
+        }
+
+        $user->email_confirmed = 1;
+        $user->confirmation_token = null;
+        $user->save();
+
+        event(new UserConfirmed($user));
+
+        $token = JWTAuth::fromUser($user);
+
+        return $this->respondWithToken($token);
     }
 
     protected function respondWithToken($token)
