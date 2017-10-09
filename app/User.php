@@ -5,28 +5,32 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'confirmation_token'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'created_at', 'updated_at'
+    protected $guarded = [
+        'email_confirmed'
     ];
+
+    protected $hidden = [
+        'password', 'created_at', 'updated_at', 'confirmation_code'
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('isConfirmed', function(Builder $builder) {
+            $builder->where('email_confirmed', 1);
+        });
+    }
 
     public function getJWTIdentifier()
     {
