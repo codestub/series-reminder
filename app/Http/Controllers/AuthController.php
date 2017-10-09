@@ -6,10 +6,9 @@ use Auth;
 use JWTAuth;
 use JWTFactory;
 use App\User;
-use App\Events\UserRegistration;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Carbon\Carbon;
+use App\Events\UserRegistration;
+use App\Events\UserConfirmed;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Requests\AuthenticationRequest;
 
@@ -17,7 +16,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('register', 'authenticate');
+        $this->middleware('auth:api')->except('register', 'authenticate', 'confirm');
     }
 
     public function register(RegistrationRequest $request)
@@ -62,13 +61,17 @@ class AuthController extends Controller
         return response()->json($this->guard()->user(), 200);
     }
     
-    public function confirm($token)
+    public function confirm()
     {
-        if (!$token) {
+        $confirmation_token = request()->confirmation_token;
+
+        if (!$confirmation_token) {
             return response()->json(['error' => 'Bad request'], 400);
         } 
 
-        $user = User::where('confirmation_token', $token)->first();
+        $user = User::withoutGlobalScopes()
+            ->where([['email_confirmed', 0], ['confirmation_token', $confirmation_token]])
+            ->first();
 
         if (!$user) {
             return response()->json(['error' => 'Invalid confirmation code'], 401);
