@@ -34,7 +34,7 @@ class ConfirmEmail extends Mailable
         return $this->markdown('emails.confirm-email')
             ->with([
                 'name' => $this->user->name,
-                'confirmation_token' => $this->user->confirmation_token
+                'url' => 'http://localhost:8000/api/confirm/' . $this->user->confirmation_token
             ]);
     }
 }

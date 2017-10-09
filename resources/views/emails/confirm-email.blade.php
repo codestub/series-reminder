@@ -1,10 +1,10 @@
 @component('mail::message')
-# Introduction
+# Hi {{ $name }}
 
-The body of your message.
+Thanks for your interest in our app, please click the link below to complete the registration process!
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => $url])
+Complete registration
 @endcomponent
 
 Thanks,<br>
