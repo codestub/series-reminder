@@ -23,3 +23,5 @@ Route::post('invalidate', 'AuthController@invalidate');
 Route::post('refresh', 'AuthController@refresh');
 Route::post('user', 'AuthController@user');
 Route::post('confirm', 'AuthController@confirm');
+
+Route::post('series/add', 'SeriesController@add');
