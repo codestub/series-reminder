@@ -1,0 +1,5 @@
+backend/
+frontend/build/
+frontend/config/
+frontend/dist/
+/*.js
