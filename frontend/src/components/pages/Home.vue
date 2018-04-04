@@ -1,22 +1,22 @@
 <template>
     <div>
         <call-to-action></call-to-action>
-        <series-list></series-list>
+        <selection></selection>
     </div>
 </template>
 
 <script>
     import CallToAction from '@/components/widgets/CallToAction';
-    import SeriesList from '@/components/widgets/SeriesList';
+    import Selection from '@/components/widgets/Selection';
 
     export default {
         components: {
             CallToAction,
-            SeriesList
+            Selection
         }
     }
 </script>
 
 <style lang="scss" scoped>
-
+    
 </style>
