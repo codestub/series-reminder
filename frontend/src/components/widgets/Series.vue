@@ -21,7 +21,6 @@
     .series {
         &__image-wrapper {
             position: relative;
-            max-width: 200px;
             padding-top: 147.253%;
             background-color: grey;
             border-radius: 5px;

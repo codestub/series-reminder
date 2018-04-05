@@ -57,9 +57,17 @@
 </script>
 
 <style lang="scss" scoped>
+    $hd: 1216px;
+    $widescreen: 1215px;
+    $desktop: 1024px;
+    $touch: 768px;
+
     .selection {
         &__container {
             margin-top: 2em;
+            @media all and (max-width: $desktop) {
+                padding: 0 1em;
+            }
         }
         &__search {
             width: 250px;
@@ -67,10 +75,38 @@
         &__list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
             margin-top: 1em;
             .series {
-                width: 15%;
+                margin-bottom: 1em;
+                @media all and (min-width: 1216px) {
+                    width: 15%;
+                    margin-right: 2%;
+                    &:nth-child(6n) {
+                        margin-right: 0;
+                    }
+                }
+                @media all and (min-width: 1025px) and (max-width: 1215px) {
+                    width: 18%;
+                    margin-right: 2.5%;
+                    &:nth-child(5n) {
+                        margin-right: 0;
+                    }
+                }
+                @media all and (min-width: 767px) and (max-width: 1024px) {
+                    width: 22.5%;
+                    margin-right: 3.333%;
+                    &:nth-child(4n) {
+                        margin-right: 0;
+                    }
+                }
+                @media all and (max-width: 768px) {
+                    width: 30%;
+                    margin-right: 5%;
+                    &:nth-child(3n) {
+                        margin-right: 0;
+                    }
+                }
             }
         }
     }
