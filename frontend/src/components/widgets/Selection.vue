@@ -19,19 +19,35 @@
 <script>
     import { mapState } from 'vuex';
     import Series from '@/components/widgets/Series';
+    import Fuse from 'fuse.js';
 
     export default {
         data() {
             return {
-                searchTerm: ''
+                searchTerm: '',
+                fuse: null,
+                fuseOptions: {
+                    shouldSort: true,
+                    threshold: 0.6,
+                    location: 0,
+                    distance: 100,
+                    maxPatternLength: 32,
+                    minMatchCharLength: 1,
+                    keys: ['title']
+                }
             }
+        },
+        created() {
+            this.fuse = new Fuse(this.series, this.fuseOptions);
         },
         computed: {
             ...mapState({
                 series: 'series'
             }),
             filteredSeries() {
-                return this.series.filter(series => series.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+                return this.searchTerm.length === 0
+                    ? this.series
+                    : this.fuse.search(this.searchTerm);
             }
         },
         components: {
