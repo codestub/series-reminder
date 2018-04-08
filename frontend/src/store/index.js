@@ -57,7 +57,8 @@ export default new Vuex.Store({
     },
     mutations: {
         receiveSeries: (state, series) => state.series = series,
-        toggleSelected: (state, key) => state.series[key].selected = !state.series[key].selected
+        toggleSelected: (state, key) => state.series[key].selected = !state.series[key].selected,
+        deselectAllSeries: state => state.series.forEach(series => series.selected = false)
     },
     actions: {
         getSeries: async ({ commit }) => {
@@ -70,7 +71,8 @@ export default new Vuex.Store({
         },
         submitSeries: async ({ commit }, { series, email }) => {
             try {
-                api.submitSeries({ ids: series.map(series => series.id), email });
+                await api.submitSeries({ ids: series.map(series => series.id), email });
+                commit('deselectAllSeries');
             } catch(err) {
                 console.debug(err);
             }
