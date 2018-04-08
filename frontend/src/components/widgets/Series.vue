@@ -25,6 +25,7 @@
             background-color: grey;
             border-radius: 5px;
             overflow: hidden;
+            box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
         }
         &__image {
             position: absolute;
