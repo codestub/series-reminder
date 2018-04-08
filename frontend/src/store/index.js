@@ -52,10 +52,29 @@ export default new Vuex.Store({
             }
         ],
     },
-    getters: {},
+    getters: {
+        selectedSeries: state => state.series.filter(series => series.selected === true)
+    },
     mutations: {
+        receiveSeries: (state, series) => state.series = series,
         toggleSelected: (state, key) => state.series[key].selected = !state.series[key].selected
     },
-    actions: {},
+    actions: {
+        getSeries: async ({ commit }) => {
+            try {
+                const series = await api.getSeries();
+                commit('receiveSeries', series);
+            } catch(err) {
+                console.debug(err);
+            }
+        },
+        submitSeries: async ({ commit }, { series, email }) => {
+            try {
+                api.submitSeries({ ids: series.map(series => series.id), email });
+            } catch(err) {
+                console.debug(err);
+            }
+        }
+    },
 });
 
