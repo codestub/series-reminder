@@ -2,17 +2,20 @@
     <div>
         <call-to-action></call-to-action>
         <selection></selection>
+        <submit-email></submit-email>
     </div>
 </template>
 
 <script>
     import CallToAction from '@/components/widgets/CallToAction';
     import Selection from '@/components/widgets/Selection';
+    import SubmitEmail from '@/components/widgets/SubmitEmail';
 
     export default {
         components: {
             CallToAction,
-            Selection
+            Selection,
+            SubmitEmail
         }
     }
 </script>
