@@ -1,5 +1,5 @@
 <template>
-    <section class="hero is-warning is-small">
+    <section class="call-to-action hero is-primary is-small">
         <div class="hero-body has-text-centered">
             <div class="container">
                 <h1 class="title">
@@ -22,5 +22,10 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../variables';
 
+    .call-to-action {
+        background-color: $ebony-clay;
+        color: $white;
+    }
 </style>

@@ -57,14 +57,17 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../variables';
+
     $hd: 1216px;
     $widescreen: 1215px;
     $desktop: 1024px;
     $touch: 768px;
 
     .selection {
+        background-color: $martinique;
         &__container {
-            margin-top: 2em;
+            padding-top: 2em;
             @media all and (max-width: $desktop) {
                 padding: 0 1em;
             }

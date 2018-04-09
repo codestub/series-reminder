@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navigation navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="https://bulma.io">
@@ -17,5 +17,9 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../variables.scss';
 
+    .navigation {
+        background-color: $martinique;        
+    }
 </style>

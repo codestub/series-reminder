@@ -1,5 +1,5 @@
 <template>
-    <section class="hero is-primary">
+    <section class="submit-email hero is-primary">
         <div class="hero-body">
             <div class="container">
                 <div class="columns">
@@ -37,5 +37,9 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../variables';
 
+    .submit-email {
+        background-color: $ebony-clay;
+    }
 </style>

@@ -18,6 +18,8 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../variables';
+
     .series {
         &__image-wrapper {
             position: relative;
@@ -40,7 +42,7 @@
             }
         }
         &__title {
-
+            color: $white;
         }
     }
 </style>
