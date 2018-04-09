@@ -1,18 +1,21 @@
 <template>
-  <div id="app">
-    <navigation></navigation>
-    <router-view/>
-  </div>
+    <div id="app">
+        <navigation></navigation>
+        <router-view/>
+        <page-footer></page-footer>
+    </div>
 </template>
 
 <script>
-  import Navigation from '@/components/widgets/Navigation.vue';
-export default {
-  name: 'App',
-  components: {
-    Navigation
-  }
-};
+	import Navigation from '@/components/widgets/Navigation.vue';
+	import PageFooter from '@/components/widgets/Footer.vue';
+
+	export default {
+		components: {
+			Navigation,
+			PageFooter
+		}
+	};
 </script>
 
 <style>
