@@ -66,6 +66,7 @@
 
     .selection {
         background-color: $martinique;
+        border-bottom: 2px solid $border;
         &__container {
             padding-top: 2em;
             @media all and (max-width: $desktop) {

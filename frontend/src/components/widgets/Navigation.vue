@@ -20,6 +20,7 @@
     @import '../variables.scss';
 
     .navigation {
-        background-color: $martinique;        
+        background-color: $martinique;
+        border-bottom: 2px solid $border;
     }
 </style>

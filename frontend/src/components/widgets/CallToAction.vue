@@ -27,5 +27,6 @@
     .call-to-action {
         background-color: $ebony-clay;
         color: $white;
+        border-bottom: 2px solid $border;
     }
 </style>
