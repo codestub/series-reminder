@@ -37,8 +37,10 @@
             height: 100%;
             background-position: center;
             background-size: cover;
+            background-repeat: no-repeat;
+            transition: all 0.5s ease-in-out;
             &:hover {
-                border: 2px solid blue;
+                transform:scale(1.01);
             }
         }
         &__title {
