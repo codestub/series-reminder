@@ -7,8 +7,8 @@
 </template>
 
 <script>
-	import Navigation from '@/components/widgets/Navigation.vue';
-	import PageFooter from '@/components/widgets/Footer.vue';
+	import Navigation from '@/components/widgets/Navigation';
+	import PageFooter from '@/components/widgets/Footer';
 
 	export default {
 		components: {
