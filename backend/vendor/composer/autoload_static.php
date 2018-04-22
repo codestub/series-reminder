@@ -60,6 +60,7 @@ class ComposerStaticInit50ea399b652d539ca1885da3da9cff6f
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\Cors\\' => 12,
         ),
         'R' => 
         array (
@@ -215,6 +216,10 @@ class ComposerStaticInit50ea399b652d539ca1885da3da9cff6f
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Spatie\\Cors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-cors/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -3145,6 +3150,11 @@ class ComposerStaticInit50ea399b652d539ca1885da3da9cff6f
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
+        'Spatie\\Cors\\Cors' => __DIR__ . '/..' . '/spatie/laravel-cors/src/Cors.php',
+        'Spatie\\Cors\\CorsProfile\\CorsProfile' => __DIR__ . '/..' . '/spatie/laravel-cors/src/CorsProfile/CorsProfile.php',
+        'Spatie\\Cors\\CorsProfile\\DefaultProfile' => __DIR__ . '/..' . '/spatie/laravel-cors/src/CorsProfile/DefaultProfile.php',
+        'Spatie\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-cors/src/CorsServiceProvider.php',
+        'Spatie\\Cors\\Exceptions\\InvalidCorsProfile' => __DIR__ . '/..' . '/spatie/laravel-cors/src/Exceptions/InvalidCorsProfile.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
