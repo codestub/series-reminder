@@ -20,6 +20,8 @@
 <style lang="scss" scoped>
     @import '../variables';
 
+    $border-width: 3px;
+
     .series {
         &__image-wrapper {
             position: relative;
@@ -36,21 +38,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border: 2px solid transparent;
+            border: $border-width solid transparent;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
             background-origin: border-box;
             &:hover {
-                border: 2px solid $info;
+                border: $border-width solid $info;
             }
             &--selected {
-                border: 2px solid $success;
+                border: $border-width solid $success;
+                &:hover {
+                    border: $border-width solid $danger;
+                }
             }
         }
         &__title {
             color: $white;
-            border: 2px solid transparent;
+            border: $border-width solid transparent;
         }
     }
 </style>

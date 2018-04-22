@@ -1,23 +1,26 @@
 <template>
     <div class="selection">
         <div class="selection__container container">
-            <div class="selection__search field">
-                <p class="control has-icons-left">
+            <div class="selection__controls field">
+                <p class="selection__search control has-icons-left">
                     <input v-model="searchTerm" class="input" type="text" placeholder="Search">
                     <span class="icon is-small is-left">
                     <i class="fas fa-search"></i>
                     </span>
                 </p>
+                <p class="selection__info">
+                    {{ `${selectedSeries.length} series selected` }}
+                </p>
             </div>
             <div class="selection__list">
-                <series @click="handleClickSeries" v-for="series in filteredSeries" :series="series" :key="series.id"></series>
+                <series @click.native="handleClickSeries(series)" v-for="series in filteredSeries" :series="series" :key="series.id"></series>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapState, mapMutations } from 'vuex';
+    import { mapGetters, mapMutations, mapState } from 'vuex';
     import Series from '@/components/widgets/Series';
     import Fuse from 'fuse.js';
 
@@ -44,6 +47,9 @@
             ...mapState({
                 series: 'series'
             }),
+            ...mapGetters({
+                selectedSeries: 'selectedSeries'
+            }),
             filteredSeries() {
                 return this.searchTerm.length === 0
                     ? this.series
@@ -55,7 +61,6 @@
                 toggleSelected: 'toggleSelected'
             }),
             handleClickSeries(series) {
-                alert('ping');
                 this.toggleSelected(series.key);
             }
         },
@@ -82,8 +87,17 @@
                 padding: 0 1em;
             }
         }
+        &__controls {
+            display: flex;
+            justify-content: space-between;
+        }
         &__search {
             width: 250px;
+        }
+        &__info {
+            color: $white;
+            text-decoration: underline;
+            user-select: none;
         }
         &__list {
             display: flex;
