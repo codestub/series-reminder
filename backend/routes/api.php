@@ -24,4 +24,5 @@ Route::post('refresh', 'AuthController@refresh');
 Route::post('user', 'AuthController@user');
 Route::post('confirm', 'AuthController@confirm');
 
+Route::get('series', 'SeriesController@index');
 Route::post('series/add', 'SeriesController@add');

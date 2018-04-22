@@ -10,7 +10,7 @@ class SeriesController extends Controller
 {
     public function index()
     {
-        // Return all series with pagination
+        return Series::all();
     }
 
     public function add()
