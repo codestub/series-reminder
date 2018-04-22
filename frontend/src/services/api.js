@@ -1,13 +1,13 @@
-import axios from 'axios';
+import xhr from '@/utils/xhr';
 
 export default {
     submitSeries({ ids, email }) {
-        return axios.post('api/someendpoint', {
+        return xhr.post('api/someendpoint', {
             series: ids,
             email: email
         });
     },
     getSeries() {
-        return axios.get('api/someendpoint');
+        return xhr.get('api/series');
     }
 }

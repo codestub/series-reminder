@@ -10,8 +10,13 @@
     import CallToAction from '@/components/widgets/CallToAction';
     import Selection from '@/components/widgets/Selection';
     import SubmitEmail from '@/components/widgets/SubmitEmail';
+    import store from '@/store';
 
     export default {
+        beforeRouteEnter: async (to, from, next) => {
+            await store.dispatch('getSeries');
+            next();
+        },
         components: {
             CallToAction,
             Selection,

@@ -1,8 +1,16 @@
+import api from '@/services/api';
+
 export default {
     getSeries: async ({ commit }) => {
         try {
-            const series = await api.getSeries();
-            commit('receiveSeries', series);
+            const response = await api.getSeries();
+            commit('receiveSeries', response.data.map((item, index) => ({
+                id: item.id,
+                key: index,
+                selected: false,
+                title: item.title,
+                image: item.image
+            })));
         } catch(err) {
             console.debug(err);
         }

@@ -10,14 +10,14 @@
                 </p>
             </div>
             <div class="selection__list">
-                <series v-for="item in filteredSeries" :series="item" :key="item.id"></series>
+                <series @click="handleClickSeries" v-for="series in filteredSeries" :series="series" :key="series.id"></series>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapMutations } from 'vuex';
     import Series from '@/components/widgets/Series';
     import Fuse from 'fuse.js';
 
@@ -48,6 +48,15 @@
                 return this.searchTerm.length === 0
                     ? this.series
                     : this.fuse.search(this.searchTerm);
+            }
+        },
+        methods: {
+            ...mapMutations({
+                toggleSelected: 'toggleSelected'
+            }),
+            handleClickSeries(series) {
+                alert('ping');
+                this.toggleSelected(series.key);
             }
         },
         components: {
