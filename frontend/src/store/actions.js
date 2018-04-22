@@ -15,9 +15,9 @@ export default {
             console.debug(err);
         }
     },
-    submitSeries: async ({ commit }, { series, email }) => {
+    submitSelection: async ({ commit, getters }, email) => {
         try {
-            await api.submitSeries({ ids: series.map(series => series.id), email });
+            await api.submitSelection({ ids: getters.selectedSeries.map(series => series.id), email });
             commit('deselectAllSeries');
         } catch(err) {
             console.debug(err);

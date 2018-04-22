@@ -1,7 +1,7 @@
 import xhr from '@/utils/xhr';
 
 export default {
-    submitSeries({ ids, email }) {
+    submitSelection({ ids, email }) {
         return xhr.post('api/someendpoint', {
             series: ids,
             email: email
