@@ -13,10 +13,12 @@ use Validator;
 class OmdbApi
 {
     public $imdbId;
+    public $season;
 
-    public function __construct($imdbId)
+    public function __construct($imdbId, $season = null)
     {
         $this->imdbId = $imdbId;
+        $this->season = $season;
     }
     
     public function addNewSeries()
