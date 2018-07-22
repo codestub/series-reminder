@@ -14,4 +14,9 @@ class Series extends Model
     {
         $this->belongsToMany('App\User');
     }
+
+    public function seasons()
+    {
+        $this->hasMany('App\Season');
+    }
 }
