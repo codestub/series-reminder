@@ -15,7 +15,8 @@ class CreateEpisodesTable extends Migration
     {
         Schema::create('episodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('season_id')->references('id')->on('season')->onDelete('cascade');
+            $table->integer('season_id')->unsigned();
+            $table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
             $table->integer('number');
             $table->timestamp('release_date')->nullable();
             $table->timestamps();
