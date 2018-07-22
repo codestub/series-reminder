@@ -368,6 +368,7 @@ class ComposerStaticInit50ea399b652d539ca1885da3da9cff6f
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Episode' => __DIR__ . '/../..' . '/app/Episode.php',
         'App\\Events\\UserConfirmed' => __DIR__ . '/../..' . '/app/Events/UserConfirmed.php',
         'App\\Events\\UserRegistration' => __DIR__ . '/../..' . '/app/Events/UserRegistration.php',
         'App\\Exceptions\\CustomException' => __DIR__ . '/../..' . '/app/Exceptions/CustomException.php',
@@ -397,6 +398,7 @@ class ComposerStaticInit50ea399b652d539ca1885da3da9cff6f
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Season' => __DIR__ . '/../..' . '/app/Season.php',
         'App\\Series' => __DIR__ . '/../..' . '/app/Series.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
