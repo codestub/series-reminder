@@ -20,6 +20,21 @@ class OmdbApi
         $this->imdbId = $imdbId;
         $this->season = $season;
     }
+
+    public function getSeason()
+    {
+        if (!$this->seriesExists()) {
+            throw new CustomException('Series not yet added', 428);
+        }
+
+        $data = $this->fetchSeasonData();
+
+        $this->validateSeasonData($data);
+
+        $this->updateSeason($data);
+
+        return true;
+    }
     
     public function addNewSeries()
     {
@@ -99,5 +114,38 @@ class OmdbApi
         }
 
         return true;
+    }
+
+    protected function fetchSeasonData()
+    {
+        try {
+            $client = new Client();
+
+            $response = $client->request('GET', 'https://omdbapi.com', ['query' => [
+                'apikey' => env('OMDB_API_KEY'),
+                'i' => $this->imdbId,
+                'type' => 'series',
+                'season' => $this->season
+            ]]);
+
+            $data = (array) json_decode($response->getBody());
+        } catch(RequestException $e) {
+            throw new CustomException($e->getMessage(), 500);
+        } catch(ClientException $e) {
+            throw new CustomException($e->getMessage(), 500);
+        }
+
+        return $data;
+    }
+
+    protected function validateSeasonData($data)
+    {
+        $validator = Validator::make($data, [
+
+        ]);
+
+        if ($validator->fails()) {
+            throw new CustomException('Season data failed validation', 422);
+        }
     }
 }
