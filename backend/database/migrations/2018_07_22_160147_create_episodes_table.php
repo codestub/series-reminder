@@ -18,6 +18,7 @@ class CreateEpisodesTable extends Migration
             $table->integer('season_id')->unsigned();
             $table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
             $table->integer('number');
+            $table->string('title')->nullable();
             $table->timestamp('release_date')->nullable();
             $table->timestamps();
         });
