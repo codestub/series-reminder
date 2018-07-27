@@ -2,12 +2,13 @@
 
 namespace App\Library;
 
+use App\Exceptions\CustomException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Client;
 use Validator;
 
-class OmdbApi
+class Omdb
 {
     public function __construct()
     {
