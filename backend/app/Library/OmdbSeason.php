@@ -4,12 +4,13 @@ namespace App\Library;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Validation\Rule;
 use GuzzleHttp\Client;
 use App\Library\Omdb;
 use App\Season;
+use App\Series;
+use App\Episode;
 
-class OmdbApiSeason extends Omdb
+class OmdbSeason extends Omdb
 {
     public $series;
     public $season;
@@ -23,15 +24,8 @@ class OmdbApiSeason extends Omdb
     public function getSeason()
     {
         $data = $this->fetch([
-            'i' => $this->series->imdbId,
+            'i' => $this->series->imdb_id,
             'season' => $this->season
-        ]);
-
-        $this->validate($data, [
-            'Season' => Rule::in([$this->season]),
-            'Episodes.*.Title' => 'required|string',
-            'Episodes.*.Episode' => 'required|integer|min:1',
-            'Episodes.*.Released' => 'required|date'
         ]);
 
         $this->persist($data);
@@ -41,21 +35,32 @@ class OmdbApiSeason extends Omdb
 
     public function persist($data)
     {
-        Season::updateOrCreate(
+        $season = Season::updateOrCreate(
             [
                 'series_id' => $this->series->id,
                 'number' => $this->season
             ]
         );
 
-        foreach ($data->episodes as $episode) {
+        for ($i = 1; $i <= count($data['Episodes']); $i++) {
+
+            $episode = (array) $data['Episodes'][$i - 1];
+
+            $this->validate($episode, [
+                'Title' => 'string',
+                'Released' => 'date'
+            ]);
+
             Episode::updateOrCreate(
                 [
-                    'number' => $episode->Episode,
-                    'season_id' => $this->season->id,
+                    'number' => $i,
+                    'season_id' => $season->id,
                 ],
                 [
-                    'release_date' => $episode->Released
+                    'number' => $i,
+                    'season_id' => $season->id,
+                    'release_date' => $episode['Released'],
+                    'title' => $episode['Title']
                 ]
             );
         }
