@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Series;
 use Illuminate\Http\Request;
-use App\Library\OmdbApi;
+use App\Library\OmdbSeries;
+use App\Library\OmdbSeason;
+use App\Exceptions\CustomException;
 
 class SeriesController extends Controller
 {
@@ -22,8 +24,13 @@ class SeriesController extends Controller
         $imdbId = $validatedRequest['imdbId'];
 
         try {
-            $omdb = new OmdbApi($imdbId);
-            $omdb->addNewSeries();
+            $omdbSeries = new OmdbSeries($imdbId);
+            $series = $omdbSeries->getSeries();
+
+            for ($i = 1; $i <= $series->total_seasons; $i++) {
+                $omdbSeason = new OmdbSeason($series->id, $i);
+                $omdbSeason->getSeason();
+            }
         } catch(CustomException $e) {
             return response()->json(['error' => 'faaaac'], 418);
             // return response()->json(['error' => 'test'], $e->code);
@@ -31,4 +38,6 @@ class SeriesController extends Controller
 
         return response()->json(['message' => 'Successfully added!'], 200);
     }
+
+    
 }
