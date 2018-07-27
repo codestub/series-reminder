@@ -15,7 +15,7 @@ class CreateSeriesTable extends Migration
     {
         Schema::create('series', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('imdbId')->unique();
+            $table->string('imdb_id')->unique();
             $table->string('title');
             $table->string('image');
             $table->integer('total_seasons');
