@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Series extends Model
 {
     protected $fillable = [
-        'imdbId', 'total_seasons', 'image', 'title'
+        'imdb_id', 'total_seasons', 'image', 'title'
     ];
     
     public function users()
