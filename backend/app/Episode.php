@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Episode extends Model
 {
     protected $fillable = [
-        'seasonId', 'title', 'number', 'date'
+        'season_id', 'title', 'number', 'release_date'
     ];
 
     public function season()
